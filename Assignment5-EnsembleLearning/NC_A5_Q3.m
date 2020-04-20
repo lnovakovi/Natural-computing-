@@ -22,13 +22,6 @@ majority_vote(c,p,p2)
 
 % 3.b)
 
-# link to the literature:  http://www.ccas.ru/voron/download/books/machlearn/kuncheva04combining.pdf
-# pages 123 and on 
-
-
-# my idea: assigning weights in range [0.1, 1] to strong classifier 
-# and then (1-that weight) divided by 10 to get weight for each of the weak classifier
-# also , again 2 cases, when strong class. predicting correct and predicting wrong, and then sum those two 
 function out=weighted_majority_vote(c,p,p2,w1)
   #######    1.)for the case when strong classifier is always right
   
@@ -93,4 +86,15 @@ title("Weighted majority vote")
 xlabel("Weight of a strong classifier")
 ylabel("Probability")
 
+% 3.d)
 
+error = 0 : 0.01 : 1;
+weights=[];
+for i=1:length(error)
+  weights= [weights, log((1-error(i))/error(i))];
+endfor
+figure(2)
+plot(error,weights)
+title("Classifier's weight for different error rate")
+xlabel("Error")
+ylabel("Classifier's weight")
